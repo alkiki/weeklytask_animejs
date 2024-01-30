@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="app.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="intro">
+      <p id="breathsp">Select number of breaths</p>
+      <div id="selectcont">
+        <select name="breaths" id="breaths">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <button>Let's start</button>
+      </div>
+      <div id="text"></div>
+      <div class="container"></div>
+    </div>
+  </body>
+
+  <script>
+    document.querySelector("button").addEventListener("click", function () {
+      document.querySelector(".container").style.visibility = "visible";
+      document.getElementById("text").style.visibility = "visible";
+      var breaths = document.getElementById("breaths");
+      var value = breaths.value;
+      const nx = 10;
+      const ny = 40;
+      let container = document.querySelector(".container");
+      container.innerHTML = "";
+      for (let i = 0; i < ny * nx; i++) {
+        let box = document.createElement("div");
+        box.setAttribute("class", "square");
+        container.appendChild(box);
+      }
+      let myTimeline = anime.timeline({
+        duration: 1000,
+        loop: parseInt(value),
+      });
+      const textElement = document.getElementById("text");
+      const texts = ["Breathe in", "Hold", "Breathe Out", "Hold"];
+      let currentIndex = 1;
+      const cycles = parseInt(value);
+      let currentCycle = 0;
+      textElement.textContent = "Breathe in";
+      function changeText() {
+        if (currentCycle > 0) {
+          textElement.textContent = texts[currentIndex - 1];
+        }
+        textElement.textContent = texts[currentIndex];
+        currentIndex = (currentIndex + 1) % texts.length;
+
+        if (currentIndex === 0) {
+          currentCycle++;
+          if (currentCycle === cycles) {
+            clearInterval(interval);
+          }
+        }
+      }
+      const interval = setInterval(changeText, 5000);
+
+      myTimeline
+        .add({
+          targets: ".square",
+          scale: ["50%", "100%"],
+          delay: anime.stagger(200, { grid: [nx, ny], from: "center" }),
+        })
+        .add({
+          targets: ".square",
+          scale: ["100%", "100%"],
+          delay: anime.stagger(200, { grid: [nx, ny], from: "center" }),
+        })
+        .add({
+          targets: ".square",
+          scale: ["100%", "50%"],
+          delay: anime.stagger(200, { grid: [nx, ny], from: "center" }),
+        })
+        .add({
+          targets: ".square",
+          scale: ["50%", "50%"],
+          delay: anime.stagger(200, { grid: [nx, ny], from: "center" }),
+        });
+    });
+  </script>
+</html>

@@ -1,0 +1,79 @@
+#breathsp{
+    text-align: center;
+}
+body{
+    font-size: 30px;
+    background-image: url('_Z5A1923.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+#intro{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100vh; 
+}
+
+#selectcont{
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+select{
+    font-size: 20px;
+    background-color: lightpink;
+}
+
+button{
+    border-radius: 20px;
+    height: 40px;
+    border: none;
+    background-color: lightpink;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(244, 212, 217);
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.square {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: #d174c5;
+    margin: 1px;
+    border-radius: 50%;
+}
+
+h1{
+    text-align: center;
+}
+
+#text{
+    text-align: center;
+}
+@media (max-width: 800px){
+    .square{
+        width: 15px;
+        height: 15px;
+    }
+    .container{
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 209px;
+        height: 90px;
+    }
+}
+
